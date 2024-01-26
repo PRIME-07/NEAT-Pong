@@ -14,7 +14,7 @@ class Ball:
         pos = 1 if random.random() < 0.5 else -1
 
         self.x_vel = pos*abs(math.cos(angle)*self.MAX_VEL)
-        self.y_vel = math.sin(angle) * self.MAX_VEL
+        self.y_vel = math.sin(angle)*self.MAX_VEL
 
     def get_random_angle(self, min_angle, max_angle, excluded):
         angle = 0
