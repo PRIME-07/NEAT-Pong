@@ -1,5 +1,5 @@
-from .ball import Ball
-from .paddle import Paddle
+from pong.ball import Ball
+from pong.paddle import Paddle
 import pygame
 import random
 pygame.init()
@@ -12,7 +12,7 @@ class GameInfo:
         self.left_score = left_score
         self.right_score = right_score
 
-class game:
+class Game:
     SCORE_FONT = pygame.font.SysFont("comicsans", 50)
     WHITE = (255,255,255) 
     BLACK = (0,0,0)
@@ -46,7 +46,7 @@ class game:
         
     def draw_hits(self):
         hits_text  = self.SCORE_FONT.render(f"{self.left_hits + self.right_hits}", 1, self.RED)
-        self.window.blit(hits_text(self.window_width // 2 - hits_text.get_width()//2, 10)) 
+        self.window.blit(hits_text, (self.window_width // 2 - hits_text.get_width()//2, 10)) 
 
     def draw_divider(self):
         for i in range (10, self.window_height, self.window_width//20):
@@ -60,18 +60,18 @@ class game:
         right_paddle = self.right_paddle
 
         if ball.y + ball.RADIUS >= self.window_height:
-            ball.y_vel *= 1
-        elif ball.y +ball.RADIUS <= 0:
-            ball.y_vel *= 1
+            ball.y_vel *= -1
+        elif ball.y - ball.RADIUS <= 0:
+            ball.y_vel *= -1
         
         if ball.x_vel < 0:
-            if ball.y >= left_paddle.y and ball.y <= left_paddle.y + Paddle.Height:
-                if ball.x - ball.radius <= left_paddle.x + Paddle.WIDTH:
-                    ball.x_vel *= 1
+            if ball.y >= left_paddle.y and ball.y <= left_paddle.y + Paddle.HEIGHT:
+                if ball.x - ball.RADIUS <= left_paddle.x + Paddle.WIDTH:
+                    ball.x_vel *= -1
 
                     middle_y = left_paddle.y +Paddle.HEIGHT/2
                     difference_in_y = middle_y - ball.y
-                    reduction_factor = (Paddle.Height/2) / ball.MAX_VEL
+                    reduction_factor = (Paddle.HEIGHT/2) / ball.MAX_VEL
                     y_vel = difference_in_y / reduction_factor
                     ball.y_vel = -1 * y_vel
                     self.left_hits += 1
@@ -117,7 +117,7 @@ class game:
         return True
     
     def loop(self):
-        self.ball.move(0)
+        self.ball.move()
         self.handle_collision()
 
         if self.ball.x < 0:
