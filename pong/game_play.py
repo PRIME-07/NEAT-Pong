@@ -73,7 +73,8 @@ class Game:
                     difference_in_y = middle_y - ball.y
                     reduction_factor = (Paddle.HEIGHT/2) / ball.MAX_VEL
                     y_vel = difference_in_y / reduction_factor
-                    ball.y_vel = -1 * y_vel
+                    random_direction = random.choice([1,-1])                                                                # new 
+                    ball.y_vel = random_direction * y_vel
                     self.left_hits += 1
         else:
             if ball.y >= right_paddle.y and ball.y <= right_paddle.y + Paddle.HEIGHT:

@@ -10,7 +10,7 @@ class Ball:
         self.x = self.original_x = x
         self.y = self.original_y = y
 
-        angle = self.get_random_angle(-30,30,[0])
+        angle = self.get_random_angle(-58,63,[0])
         pos = 1 if random.random() < 0.5 else -1
 
         self.x_vel = pos*abs(math.cos(angle)*self.MAX_VEL)
