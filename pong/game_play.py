@@ -14,9 +14,11 @@ class GameInfo:
 
 class Game:
     SCORE_FONT = pygame.font.SysFont("comicsans", 50)
+    SMALL_FONT = pygame.font.SysFont("comicsans", 30)
     WHITE = (255,255,255) 
     BLACK = (0,0,0)
     RED = (255,0,0)
+    GREEN = (0,255,0)
 
 
     def __init__(self, window, window_width, window_height):
@@ -116,7 +118,41 @@ class Game:
             self.right_paddle.move(up)
             
         return True
-    
+
+    def draw_end_game_win_message(self, message):
+        end_game_text = self.SCORE_FONT.render(message, 1, self.GREEN)
+        self.window.blit(end_game_text, (self.window_width//2 - end_game_text.get_width()//2, 30))
+
+    def draw_end_game_lose_message(self, message):
+        end_game_text = self.SCORE_FONT.render(message, 1, self.RED)
+        self.window.blit(end_game_text, (self.window_width//2 - end_game_text.get_width()//2, 30))
+
+    def draw_end_game_win_instruction(self, message):
+        instruction = self.SMALL_FONT.render(message, 1, self.GREEN)
+        self.window.blit(instruction, (self.window_width//2 - instruction.get_width()//2, 100))
+
+    def draw_end_game_lose_instruction(self, message):
+        instruction = self.SMALL_FONT.render(message, 1, self.RED)
+        self.window.blit(instruction, (self.window_width//2 - instruction.get_width()//2, 100))
+
+    def handle_end_game(self):
+        if self.left_score >= 2:
+            self.draw_end_game_win_message("You Won!")
+            self.draw_end_game_win_instruction("Congrats! You saved us from AI invasion :)")
+            pygame.display.update()
+            pygame.time.delay(5000)
+            self.reset()
+            return True
+            
+        elif self.right_score >= 2:
+            self.draw_end_game_lose_message("You Lost!")
+            self.draw_end_game_lose_instruction("You lost to a bot? What a noob! :(")
+            pygame.display.update()
+            pygame.time.delay(5000)
+            self.reset()
+            return True
+        return False
+
     def loop(self):
         self.ball.move()
         self.handle_collision()
@@ -129,6 +165,11 @@ class Game:
             self.left_score += 1
 
         game_info =  GameInfo(self.left_hits, self.right_hits, self.left_score, self.right_score)
+        
+        if self.handle_end_game():
+            return game_info
+
+
         return game_info
     
     def reset(self):

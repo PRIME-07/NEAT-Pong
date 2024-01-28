@@ -3,7 +3,7 @@ from pong import Game
 import neat
 import os
 import pickle
-
+import sys
 
 class PongGame:
     def __init__(self, window, width, height):
