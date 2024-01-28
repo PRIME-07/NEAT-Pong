@@ -136,7 +136,7 @@ class Game:
         self.window.blit(instruction, (self.window_width//2 - instruction.get_width()//2, 100))
 
     def handle_end_game(self):
-        if self.left_score >= 2:
+        if self.left_score >= 20:
             self.draw_end_game_win_message("You Won!")
             self.draw_end_game_win_instruction("Congrats! You saved us from AI invasion :)")
             pygame.display.update()
@@ -144,7 +144,7 @@ class Game:
             self.reset()
             return True
             
-        elif self.right_score >= 2:
+        elif self.right_score >= 20:
             self.draw_end_game_lose_message("You Lost!")
             self.draw_end_game_lose_instruction("You lost to a bot? What a noob! :(")
             pygame.display.update()
