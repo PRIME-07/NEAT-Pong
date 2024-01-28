@@ -119,7 +119,7 @@ def run_neat(config):
 def test_ai(config):
     width, height = 700, 500
     window = pygame.display.set_mode((width, height))
-    with open("best.pickle", "rb") as f:
+    with open("../best.pickle", "rb") as f:
         winner = pickle.load(f)
     
     game = PongGame(window, width, height)
