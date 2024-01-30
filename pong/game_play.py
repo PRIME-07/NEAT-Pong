@@ -75,7 +75,7 @@ class Game:
                     difference_in_y = middle_y - ball.y
                     reduction_factor = (Paddle.HEIGHT/2) / ball.MAX_VEL
                     y_vel = difference_in_y / reduction_factor
-                    random_direction = random.choice([1,-1])                                                                # new 
+                    random_direction = random.choice([1,-1])                                                                
                     ball.y_vel = random_direction * y_vel
                     self.left_hits += 1
         else:
