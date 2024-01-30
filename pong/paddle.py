@@ -4,16 +4,14 @@ class Paddle:
         VEL = 4
         WIDTH = 20
         HEIGHT = 100
-
+        WHITE = (255,255,255)
 
         def __init__(self, x, y):
                 self.x = self.original_x = x
                 self.y = self.orignial_y = y
 
         def draw(self, win):
-                pygame.draw.rect(
-                    win, (255, 255, 255), (self.x, self.y, self.WIDTH, self.HEIGHT)
-                    )
+                pygame.draw.rect(win, self.WHITE, (self.x, self.y, self.WIDTH, self.HEIGHT))
         
         def move(self, up=True):
                 if up:

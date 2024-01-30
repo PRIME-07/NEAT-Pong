@@ -54,7 +54,7 @@ class Game:
         for i in range (10, self.window_height, self.window_width//20):
             if i%2 == 1:
                 continue
-            pygame.draw.rect(self.window, self.WHITE, (self.window_width//2 - 5, i, 10, self.window_height//20))
+            pygame.draw.rect(self.window, self.RED, (self.window_width//2 - 5, i, 10, self.window_height//20))
     
     def handle_collision(self):
         ball = self.ball
