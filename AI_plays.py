@@ -25,9 +25,9 @@ class PongGame:
                     break
             
             keys = pygame.key.get_pressed()
-            if keys[pygame.K_w]:
+            if keys[pygame.K_UP]:
                 self.game.move_paddle(left=True, up=True)
-            if keys[pygame.K_s]:
+            if keys[pygame.K_DOWN]:
                 self.game.move_paddle(left=True, up=False)
 
             output = net.activate((self.right_paddle.y, self.ball.y, abs(self.right_paddle.x - self.ball.x)))
@@ -119,7 +119,7 @@ def run_neat(config):
 def test_ai(config):
     width, height = 700, 500
     window = pygame.display.set_mode((width, height))
-    with open("./best.pickle", "rb") as f:
+    with open("NEAT-Pong/best.pickle", "rb") as f:
         winner = pickle.load(f)
     
     game = PongGame(window, width, height)
